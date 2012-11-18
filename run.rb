@@ -9,6 +9,7 @@ end
 
 username = ARGV[0]
 password = ARGV[1]
+db = ARGV[2]|| "test"
 url = 'service:jmx:rmi://localhost.localdomain:8686/jndi/rmi://localhost.localdomain:8686/jmxrmi' 
 mon = GlassFishMonitor.new url, username, password
 
