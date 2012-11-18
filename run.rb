@@ -3,14 +3,15 @@ require 'lib/models.rb'
 require 'lib/glassfish_monitor.rb'
 require 'benchmark'
 
-Mongoid.configure do |config|
-  config.connect_to("test")
-end
-
 username = ARGV[0]
 password = ARGV[1]
-db = ARGV[2]|| "test"
+db = ARGV[2] || "test"
 url = 'service:jmx:rmi://localhost.localdomain:8686/jndi/rmi://localhost.localdomain:8686/jmxrmi' 
+
+Mongoid.configure do |config|
+  config.connect_to(db)
+end
+
 mon = GlassFishMonitor.new url, username, password
 
 SystemEnviroment.new(mon.get_system_enviroments).save
